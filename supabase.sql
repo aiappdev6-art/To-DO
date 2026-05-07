@@ -1,14 +1,15 @@
 -- Run this in the Supabase SQL editor.
 -- Safe to re-run: drops and recreates everything.
 
-drop trigger if exists trg_bump_streak on public.todo_checks;
-drop trigger if exists set_todo_user_id on public.todos;
-drop function if exists public.bump_streak();
-drop function if exists public.set_todo_user_id();
+-- Drop tables first (cascade removes their triggers automatically),
+-- then drop functions. Tolerant of partial / fresh databases.
 drop table if exists public.todo_checks cascade;
 drop table if exists public.user_streaks cascade;
 drop table if exists public.todos cascade;
 drop table if exists public.groups cascade;
+drop view if exists public.checker_profiles cascade;
+drop function if exists public.bump_streak() cascade;
+drop function if exists public.set_todo_user_id() cascade;
 
 -- Groups (categories)
 create table public.groups (
