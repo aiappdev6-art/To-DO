@@ -104,32 +104,32 @@ export default function TimerClient({ todoId, currentUserId }: Props) {
         </div>
       )}
 
-      <div className="flex items-center gap-2 justify-center">
+      <div className="flex items-center gap-2 justify-center flex-wrap">
         {!running ? (
           <button
             onClick={start}
-            className="px-5 py-2 rounded-md bg-black text-white dark:bg-white dark:text-black"
+            className="px-6 py-2.5 rounded-full bg-[color:var(--foreground)] text-[color:var(--background)] font-medium shadow-sm hover:opacity-90 transition"
           >
             {done ? "Restart" : remaining < initial.current ? "Resume" : "Start"}
           </button>
         ) : (
           <button
             onClick={pause}
-            className="px-5 py-2 rounded-md border border-neutral-300 dark:border-neutral-700"
+            className="px-6 py-2.5 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] hover:border-[color:var(--accent)] transition"
           >
             Pause
           </button>
         )}
         <button
           onClick={reset}
-          className="px-5 py-2 rounded-md border border-neutral-300 dark:border-neutral-700"
+          className="px-6 py-2.5 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] hover:border-[color:var(--accent)] transition"
         >
           Reset
         </button>
         {done && currentUserId && (
           <button
             onClick={markDone}
-            className="px-5 py-2 rounded-md bg-amber-500 text-white"
+            className="px-6 py-2.5 rounded-full bg-amber-500 text-white font-medium shadow-md shadow-amber-500/30 hover:bg-amber-600 transition"
           >
             Mark done
           </button>

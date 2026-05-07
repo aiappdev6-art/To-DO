@@ -21,33 +21,42 @@ export default function SortFilterBar({
 }: Props) {
   return (
     <div className="flex flex-wrap items-center gap-2 text-sm">
-      <label className="flex items-center gap-1 text-neutral-600 dark:text-neutral-400">
-        Sort
+      <div className="inline-flex items-center rounded-full bg-[color:var(--surface)] border border-[color:var(--border)] overflow-hidden">
+        <span className="pl-3 pr-2 text-xs text-[color:var(--muted)]">Sort</span>
         <select
           value={sortKey}
           onChange={(e) => onSortKey(e.target.value as SortKey)}
-          className="px-2 py-1 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900"
+          className="bg-transparent py-1.5 pr-2 outline-none cursor-pointer"
         >
-          <option value="created">Created</option>
+          <option value="created">Newest</option>
           <option value="priority">Priority</option>
           <option value="deadline">Deadline</option>
-          <option value="task">Task</option>
+          <option value="task">Name</option>
         </select>
-      </label>
-      <button
-        onClick={() => onSortDir(sortDir === "asc" ? "desc" : "asc")}
-        className="px-2 py-1 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900"
-        title="Toggle direction"
+        <button
+          onClick={() => onSortDir(sortDir === "asc" ? "desc" : "asc")}
+          className="px-2.5 py-1.5 border-l border-[color:var(--border)] text-[color:var(--muted)] hover:text-[color:var(--foreground)]"
+          title="Toggle direction"
+        >
+          {sortDir === "asc" ? "↑" : "↓"}
+        </button>
+      </div>
+      <label
+        className={`ml-auto inline-flex items-center gap-2 px-3 py-1.5 rounded-full border cursor-pointer transition-colors ${
+          hideChecked
+            ? "bg-[color:var(--accent-soft)] border-[color:var(--accent)] text-amber-700 dark:text-amber-300"
+            : "bg-[color:var(--surface)] border-[color:var(--border)] text-[color:var(--muted)] hover:text-[color:var(--foreground)]"
+        }`}
       >
-        {sortDir === "asc" ? "↑" : "↓"}
-      </button>
-      <label className="ml-auto flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
         <input
           type="checkbox"
+          className="hidden"
           checked={hideChecked}
           onChange={(e) => onHideChecked(e.target.checked)}
         />
-        Hide checked
+        <span className="text-xs font-medium">
+          {hideChecked ? "Showing active only" : "Hide checked"}
+        </span>
       </label>
     </div>
   );

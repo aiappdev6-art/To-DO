@@ -40,8 +40,17 @@ export default function CheckersPopover({
 
   if (!visibleToOwner) {
     return (
-      <span className="text-neutral-500">
-        {checks.length} checked
+      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-[color:var(--surface-2)] text-[color:var(--muted)]">
+        <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+          <path
+            d="M1.5 4.5L3.5 6.5L7.5 2.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        {checks.length}
       </span>
     );
   }
@@ -53,8 +62,17 @@ export default function CheckersPopover({
           e.stopPropagation();
           setOpen((v) => !v);
         }}
-        className="underline decoration-dotted underline-offset-2 hover:text-neutral-800 dark:hover:text-neutral-200"
+        className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-[color:var(--surface-2)] text-[color:var(--muted)] hover:text-[color:var(--accent)] underline decoration-dotted underline-offset-2"
       >
+        <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+          <path
+            d="M1.5 4.5L3.5 6.5L7.5 2.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
         {checks.length} checked
       </button>
       <AnimatePresence>
@@ -64,9 +82,9 @@ export default function CheckersPopover({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -4, scale: 0.96 }}
             transition={{ duration: 0.12 }}
-            className="absolute z-30 left-0 top-full mt-1 w-56 max-h-56 overflow-auto rounded-md border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 shadow-md p-2 text-xs"
+            className="absolute z-30 left-0 top-full mt-1 w-56 max-h-56 overflow-auto rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] shadow-lg shadow-black/5 p-2 text-xs"
           >
-            <div className="font-medium mb-1 text-neutral-700 dark:text-neutral-300">
+            <div className="font-medium mb-1.5 text-[color:var(--foreground)]">
               Checked by
             </div>
             <ul className="space-y-1">
@@ -78,7 +96,7 @@ export default function CheckersPopover({
                   <span className="truncate">
                     {emails[c.user_id] ?? c.user_id.slice(0, 8)}
                   </span>
-                  <span className="text-neutral-400">
+                  <span className="text-[color:var(--muted)]">
                     {new Date(c.checked_at).toLocaleDateString()}
                   </span>
                 </li>

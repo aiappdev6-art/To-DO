@@ -5,7 +5,7 @@ import type { Group } from "@/lib/types";
 
 type Props = {
   groups: Group[];
-  active: string | null; // null = all, "" = ungrouped, id = specific group
+  active: string | null;
   onSelect: (g: string | null) => void;
   onCreate: (name: string) => void;
   canCreate: boolean;
@@ -32,10 +32,10 @@ export default function GroupBar({
   }) => (
     <button
       onClick={onClick}
-      className={`whitespace-nowrap px-3 py-1.5 rounded-full text-sm border transition-colors ${
+      className={`whitespace-nowrap px-3.5 py-1.5 rounded-full text-sm border transition-all ${
         selected
-          ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white"
-          : "bg-white dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300"
+          ? "bg-[color:var(--foreground)] text-[color:var(--background)] border-[color:var(--foreground)] shadow-sm"
+          : "bg-[color:var(--surface)] border-[color:var(--border)] text-[color:var(--muted)] hover:text-[color:var(--foreground)] hover:border-[color:var(--accent)]"
       }`}
     >
       {label}
@@ -43,10 +43,10 @@ export default function GroupBar({
   );
 
   return (
-    <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1">
+    <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-thin">
       <Pill label="All" selected={active === null} onClick={() => onSelect(null)} />
       <Pill
-        label="Ungrouped"
+        label="Inbox"
         selected={active === ""}
         onClick={() => onSelect("")}
       />
@@ -69,7 +69,7 @@ export default function GroupBar({
                 setAdding(false);
               }
             }}
-            className="flex items-center gap-1"
+            className="flex items-center"
           >
             <input
               autoFocus
@@ -78,16 +78,16 @@ export default function GroupBar({
               onBlur={() => {
                 if (!name.trim()) setAdding(false);
               }}
-              placeholder="Group name"
-              className="px-2 py-1 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-sm w-32"
+              placeholder="New list…"
+              className="px-3 py-1.5 rounded-full border border-[color:var(--accent)] bg-[color:var(--surface)] text-sm w-32 outline-none"
             />
           </form>
         ) : (
           <button
             onClick={() => setAdding(true)}
-            className="whitespace-nowrap px-3 py-1.5 rounded-full text-sm border border-dashed border-neutral-400 text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200"
+            className="whitespace-nowrap px-3 py-1.5 rounded-full text-sm border border-dashed border-[color:var(--border)] text-[color:var(--muted)] hover:text-[color:var(--accent)] hover:border-[color:var(--accent)]"
           >
-            + Group
+            + List
           </button>
         ))}
     </div>

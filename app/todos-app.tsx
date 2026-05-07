@@ -261,16 +261,20 @@ export default function TodosApp({
       />
 
       {!isGuest && (
-        <form onSubmit={addTodo} className="flex gap-2">
+        <form
+          onSubmit={addTodo}
+          className="flex gap-2 p-1.5 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] shadow-sm focus-within:border-[color:var(--accent)] transition-colors"
+        >
           <input
             value={task}
             onChange={(e) => setTask(e.target.value)}
             placeholder="What needs doing?"
-            className="flex-1 px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900"
+            className="flex-1 px-3 py-2 bg-transparent outline-none placeholder:text-[color:var(--muted)]"
           />
           <button
             type="submit"
-            className="px-4 py-2 rounded-md bg-black text-white dark:bg-white dark:text-black"
+            disabled={!task.trim()}
+            className="px-4 py-2 rounded-xl bg-[color:var(--foreground)] text-[color:var(--background)] font-medium disabled:opacity-40 disabled:cursor-not-allowed transition-opacity hover:opacity-90"
           >
             Add
           </button>
@@ -286,10 +290,13 @@ export default function TodosApp({
         onHideChecked={setHideChecked}
       />
 
-      <ul className="rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden">
+      <ul className="space-y-2">
         {visible.length === 0 && (
-          <li className="px-3 py-8 text-center text-sm text-neutral-500">
-            {isGuest ? "No todos to show." : "Nothing here. Add a todo above."}
+          <li className="rounded-2xl border border-dashed border-[color:var(--border)] bg-[color:var(--surface)]/50 px-4 py-12 text-center text-sm text-[color:var(--muted)]">
+            <div className="text-3xl mb-2 opacity-60">·°˖</div>
+            {isGuest
+              ? "Quiet here. Sign in to start your list."
+              : "Nothing yet. Add your first ember above."}
           </li>
         )}
         <AnimatePresence initial={false}>

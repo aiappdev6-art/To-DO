@@ -106,12 +106,12 @@ export function UndoProvider({ children }: { children: React.ReactNode }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
             transition={{ type: "spring", stiffness: 380, damping: 30 }}
-            className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-full bg-neutral-900 text-white shadow-lg flex items-center gap-3 text-sm max-w-[92vw]"
+            className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-full bg-neutral-900/95 dark:bg-neutral-100/95 text-white dark:text-neutral-900 backdrop-blur shadow-2xl shadow-black/20 flex items-center gap-3 text-sm max-w-[92vw] border border-white/10 dark:border-black/10"
           >
             <span className="truncate">{snack.label}</span>
             <button
               onClick={undo}
-              className="font-medium text-amber-300 hover:text-amber-200"
+              className="font-semibold text-amber-300 dark:text-amber-600 hover:text-amber-200 dark:hover:text-amber-700 uppercase tracking-wider text-xs"
             >
               Undo
             </button>
